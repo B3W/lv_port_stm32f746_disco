@@ -108,8 +108,9 @@
  * - LV_OS_WINDOWS
  * - LV_OS_MQX
  * - LV_OS_SDL2
+ * - LV_OS_THREADX
  * - LV_OS_CUSTOM */
-#define LV_USE_OS   LV_OS_NONE
+#define LV_USE_OS   LV_OS_THREADX
 
 #if LV_USE_OS == LV_OS_CUSTOM
     #define LV_OS_CUSTOM_INCLUDE <stdint.h>
@@ -121,6 +122,16 @@
      * RTOS task notifications can only be used when there is only one task that can be the recipient of the event.
      */
     #define LV_USE_FREERTOS_TASK_NOTIFY 1
+#endif
+#if LV_USE_OS == LV_OS_THREADX
+    /** Size of memory, in bytes, available for ThreadX task stack allocation. */
+    #define LV_THREADX_TASK_MEMORY_POOL_SIZE    8192
+
+    /** Align start address of ThreadX task stack memory pool to this bytes. */
+    #define LV_THREADX_TASK_MEMORY_POOL_ALIGN   4
+
+    /** Max length, in characters, of ThreadX task name. Longer names will be truncated. */
+    #define LV_THREADX_TASK_NAME_MAX_LENGTH     32
 #endif
 
 /*========================

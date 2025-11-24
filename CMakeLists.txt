@@ -58,14 +58,15 @@ FILE(GLOB_RECURSE HAL_Sources HAL_Driver/Src/*.c
 )
 FILE(GLOB_RECURSE LVGL_Sources CONFIGURE_DEPENDS hal_stm_lvgl/*.c)
 
+add_subdirectory(threadx)
 add_subdirectory(lvgl)
 
 add_definitions(
     -DSTM32
     -DSTM32F7
+    -DSTM32F746xx
     -DSTM32F746G_DISCO
     -DDEBUG
-    -DSTM32F746xx
     -DUSE_HAL_DRIVER
 )
 

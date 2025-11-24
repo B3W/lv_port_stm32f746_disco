@@ -1,4 +1,6 @@
 [submodule "lvgl"]
 	path = lvgl
 	url = https://github.com/B3W/lvgl.git
-	branch = release/v8.2
+[submodule "threadx"]
+	path = threadx
+	url = https://github.com/eclipse-threadx/threadx.git
