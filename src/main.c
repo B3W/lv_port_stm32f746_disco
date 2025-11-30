@@ -17,6 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include "app_threadx.h"
 #include "main.h"
 #include "adc.h"
 #include "crc.h"
@@ -39,12 +40,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
-#include "lvgl/lvgl.h"
-#include "lvgl/demos/lv_demos.h"
-
-#include "hal_stm_lvgl/tft/tft.h"
-#include "hal_stm_lvgl/touchpad/touchpad.h"
 
 /* USER CODE END Includes */
 
@@ -145,25 +140,18 @@ int main(void)
    MX_USB_OTG_FS_HCD_Init();
    /* USER CODE BEGIN 2 */
 
-   lv_init();
-
-   lv_stm32f746_display_init();
-   touchpad_init();
-
-   // lv_demo_benchmark();
-   // lv_demo_music();
-   // lv_demo_stress();
-   lv_demo_widgets();
-
    /* USER CODE END 2 */
+
+   MX_ThreadX_Init();
+
+   /* We should never get here as control is now taken by the scheduler */
 
    /* Infinite loop */
    /* USER CODE BEGIN WHILE */
    while (1)
    {
       /* USER CODE END WHILE */
-      HAL_Delay(5);
-      lv_timer_handler();
+
       /* USER CODE BEGIN 3 */
    }
    /* USER CODE END 3 */
@@ -254,6 +242,28 @@ void PeriphCommonClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM6 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM6)
+  {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 
 /* USER CODE END 4 */
 

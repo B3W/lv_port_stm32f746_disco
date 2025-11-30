@@ -110,7 +110,7 @@
  * - LV_OS_SDL2
  * - LV_OS_THREADX
  * - LV_OS_CUSTOM */
-#define LV_USE_OS   LV_OS_THREADX
+#define LV_USE_OS   LV_OS_NONE
 
 #if LV_USE_OS == LV_OS_CUSTOM
     #define LV_OS_CUSTOM_INCLUDE <stdint.h>
@@ -125,7 +125,7 @@
 #endif
 #if LV_USE_OS == LV_OS_THREADX
     /** Size of memory, in bytes, available for ThreadX task stack allocation. */
-    #define LV_THREADX_TASK_MEMORY_POOL_SIZE    8192
+    #define LV_THREADX_TASK_MEMORY_POOL_SIZE    16384
 
     /** Align start address of ThreadX task stack memory pool to this bytes. */
     #define LV_THREADX_TASK_MEMORY_POOL_ALIGN   4
